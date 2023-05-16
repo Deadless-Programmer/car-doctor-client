@@ -7,41 +7,46 @@ import Checkout from "../Pages/Checkout/Checkout";
 import Bookings from "../Pages/Bookings/Bookings";
 import PrivetRoutes from "./PrivetRoutes";
 
-
 const router = createBrowserRouter([
-    {
-        path : "/",
-        element:<Main></Main>,
-        children:[
-            {
-                path : "/",
-                element: <Home></Home>
-            },
-            {
-                path:'login',
-                element:<Login></Login>
-            },
-            {
-                path:"signUp",
-                element:<SignUp></SignUp>
-            },
-            {
-                path: "checkout/:id",
-                element: <PrivetRoutes><Checkout></Checkout></PrivetRoutes> ,
-                loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
-            },
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "signUp",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "checkout/:id",
+        element: (
+          <PrivetRoutes>
+            <Checkout></Checkout>
+          </PrivetRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://car-doctor-server-eta-ten.vercel.app/services/${params.id}`
+          ),
+      },
 
-            {
-                path :'bookings',
-                element : <PrivetRoutes><Bookings></Bookings></PrivetRoutes>
-            }
-        ]
-    }
-])
-
-
-
-
-
+      {
+        path: "bookings",
+        element: (
+          <PrivetRoutes>
+            <Bookings></Bookings>
+          </PrivetRoutes>
+        ),
+      },
+    ],
+  },
+]);
 
 export default router;

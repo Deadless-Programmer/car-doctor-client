@@ -4,44 +4,42 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import SocialLogin from "../Shared/Social/SocialLogin";
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
-    const {signIn} = useContext(AuthContext);
-    const navigate =useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
-
-    const handleLogin =(event)=>{
-            event.preventDefault();
-            const form = event.target;
-            const email = form.email.value;
-            const password = form.password.value;
-            console.log(email, password);
-            signIn(email, password)
-            .then(result=>{
-                const user = result.user;
-                // const loggedUser ={
-                //   email: user.email
-                // }
-                console.log(user);
-                // fetch('http://localhost:5000/jwt', {
-                //   method: "POST",
-                //   headers:{
-                //     'content-type':"application/json"
-                //   },
-                //   body:JSON.stringify(loggedUser)
-                // })
-                // .then(res => res.json())
-                // .then(data=>{
-                //     console.log("jwt response",data);
-                //     localStorage.setItem('car-access-token', data.token);
-                //     navigate(from, {replace: true})
-                // })
-                
-            })
-            .catch(error=>{
-                console.log(error);
-            })
-    }
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        // const loggedUser ={
+        //   email: user.email
+        // }
+        console.log(user);
+        // fetch('https://car-doctor-server-eta-ten.vercel.app/jwt', {
+        //   method: "POST",
+        //   headers:{
+        //     'content-type':"application/json"
+        //   },
+        //   body:JSON.stringify(loggedUser)
+        // })
+        // .then(res => res.json())
+        // .then(data=>{
+        //     console.log("jwt response",data);
+        //     localStorage.setItem('car-access-token', data.token);
+        //     navigate(from, {replace: true})
+        // })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -59,7 +57,7 @@ const Login = () => {
                   </label>
                   <input
                     type="email"
-                    name = "email"
+                    name="email"
                     placeholder="email"
                     className="input input-bordered"
                   />
@@ -70,7 +68,7 @@ const Login = () => {
                   </label>
                   <input
                     type="text"
-                    name = "password"
+                    name="password"
                     placeholder="password"
                     className="input input-bordered"
                   />
@@ -90,7 +88,12 @@ const Login = () => {
               </div>
             </form>
             <SocialLogin></SocialLogin>
-            <p className="ml-6 p-3 ">New to Car Doctors? <Link to="/signUp" className="link  text-amber-800">Sign Up</Link> </p>
+            <p className="ml-6 p-3 ">
+              New to Car Doctors?{" "}
+              <Link to="/signUp" className="link  text-amber-800">
+                Sign Up
+              </Link>{" "}
+            </p>
           </div>
         </div>
       </div>
