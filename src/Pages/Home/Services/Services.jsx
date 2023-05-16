@@ -13,7 +13,7 @@ const Services = () => {
     <div className="">
       <div className=" text-center space-y-2 my-5">
         <h3 className="text-2xl font-bold text-amber-600">Servies</h3>
-        <h1 className="text-4xl font-bold">Our Services Area</h1>
+        <h1 className="text-4xl font-bold">Our Services Zone</h1>
         <p className="">
           Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
           excepturi exercitationem quasi. <br /> In deleniti eaque aut
